@@ -91,6 +91,7 @@ int main()
     {
       winner = 'O';
       playing = false;
+      cout << "Winner is " << winner<< endl;
     }
 
     //TODO: Print the current board
@@ -102,7 +103,6 @@ int main()
     //1-B. Display an newline to move to the next row of the board
 
   }while( playing );
-  cout << "Winner is " << winner<< endl;
   cout<<"Goodbye!\n";
 
   return 0;
