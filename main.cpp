@@ -1,4 +1,4 @@
-//Author:
+//Author: Logen Thornton
 #include <iostream>
 
 using namespace std;
@@ -15,13 +15,14 @@ int main()
 {
   //3x3 matrix of characters, initially with blank spaces in each position
   char board[ROWS][COLUMNS] = {{BLANK, BLANK, BLANK},
-                               {BLANK, BLANK, BLANK},
-                               {BLANK, BLANK, BLANK}};
+    {BLANK, BLANK, BLANK},
+    {BLANK, BLANK, BLANK}};
 
-  char turn = X; //Player X always goes first
+  char turn = 'X'; //Player X always goes first
   int row;
   int column;
   bool playing = true; //Continue playing by default
+  char winner = ' ';
 
   do
   {
@@ -40,6 +41,19 @@ int main()
     {
       cout<<"Values must be between 0 and 2.\n";
     }
+    else
+    {
+      if (turn=='X')
+      {
+        board[row][column] = 'X';
+        turn = 'O';
+      }
+      else
+      {
+        board[row][column] = 'O';
+        turn= 'X';
+      }
+    }
     //TODO: Place the piece and swap turns
     //Outline
     //1. When neither of the (above) if nor else if statements are true, then...
@@ -48,8 +62,37 @@ int main()
     //1-B-1.  turn should be assigned the value 'O'
     //1-C.  In any other case, then...
     //1-C-1.  turn should be assigned the value 'X'
-    
+
     cout<<"\nBOARD\n-----\n";
+    for (int i=0; i<3; i++)
+    {
+      for (int g=0; g<3; g++)
+      {
+        cout<<board[i][g]<<" ";
+      }
+      cout << endl;
+    }
+
+
+    if ((board[0][0] == 'X' && board[0][1] == 'X' && board[0][2] == 'X') || (board[1][0] == 'X' && board[1][1] == 'X'
+          && board[1][2] == 'X') || (board[2][0] == 'X' && board[2][1] == 'X' && board[2][2] == 'X') || (board[0][0] == 'X'
+            && board[1][0] == 'X' && board[2][0] == 'X') || (board[0][1] == 'X' && board[1][1] == 'X' && board[2][1] == 'X') ||
+        (board[2][0] == 'X' && board[2][1] == 'X' && board[2][2] == 'X') || (board[0][0] == 'X' && board[1][1] == 'X'
+          && board[2][2] == 'X') || (board[2][0] == 'X' && board[1][1] == 'X' && board[0][2] == 'X'))
+    {
+      winner = 'X';
+      playing = false;
+    }
+    else if ((board[0][0] == 'O' && board[0][1] == 'O' && board[0][2] == 'O') || (board[1][0] == 'O' && board[1][1] == 'O'
+          && board[1][2] == 'O') || (board[2][0] == 'O' && board[2][1] == 'O' && board[2][2] == 'O') || (board[0][0] == 'O'
+            && board[1][0] == 'O' && board[2][0] == 'O') || (board[0][1] == 'O' && board[1][1] == 'O' && board[2][1] == 'O') ||
+        (board[2][0] == 'O' && board[2][1] == 'O' && board[2][2] == 'O') || (board[0][0] == 'O' && board[1][1] == 'O'
+          && board[2][2] == 'O') || (board[2][0] == 'O' && board[1][1] == 'O' && board[0][2] == 'O'))
+    {
+      winner = 'O';
+      playing = false;
+    }
+
     //TODO: Print the current board
     //Outline
     //1. Traverse through each row, calling the current row r
@@ -57,9 +100,9 @@ int main()
     //1-A-1.  Display the value of the board at location of r and c
     //1-A-2. Display a space
     //1-B. Display an newline to move to the next row of the board
-    
-  }while( playing );
 
+  }while( playing );
+  cout << "Winner is " << winner<< endl;
   cout<<"Goodbye!\n";
 
   return 0;
